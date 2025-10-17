@@ -1,0 +1,51 @@
+[
+  {
+    "className": "Honors Cybersecurity & Computer Programming",
+    "teacher": "Rehwinkel, Christine",
+    "roomNumber": "A234",
+    "period": 1,
+    "subjectArea": "Technology"
+  },
+  {
+    "className": "AP English Lit & Comp",
+    "teacher": "Rivera, Angela",
+    "roomNumber": "A123",
+    "period": 2,
+    "subjectArea": "English"
+  },
+  {
+    "className": "Health 12",
+    "teacher": "Scalzo, Nicholas",
+    "roomNumber": "C130",
+    "period": 3,
+    "subjectArea": "Health"
+  },
+  {
+    "className": "Precalculus",
+    "teacher": "Poe, Christopher",
+    "roomNumber": "E245",
+    "period": 4,
+    "subjectArea": "Math"
+  },
+  {
+    "className": "AP Computer Science A",
+    "teacher": "Rehwinkel, Christine",
+    "roomNumber": "A234",
+    "period": 5,
+    "subjectArea": "Math"
+  },
+  {
+    "className": "AP Computer Science Principles",
+    "teacher": "Leonard, Sarah",
+    "roomNumber": "B110",
+    "period": 6,
+    "subjectArea": "Technology"
+  },
+  {
+    "className": "Honors NJIT IS219 Advanced Website Development WDP",
+    "teacher": "Kilgore, Gregory",
+    "roomNumber": "B111",
+    "period": 7,
+    "subjectArea": "Technology"
+  }
+]

@@ -22,6 +22,30 @@ const scheduleNames = {
 };
 
 /* ========================================
+   HELPER FUNCTION - Get Font Awesome Icon
+   ======================================== */
+
+/**
+ * Returns the appropriate Font Awesome icon class based on subject area
+ * @param {string} subjectArea - The subject area of the class
+ * @returns {string} Font Awesome icon class
+ */
+function getSubjectIcon(subjectArea) {
+	const iconMap = {
+		Math: "fa-solid fa-calculator",
+		Technology: "fa-solid fa-laptop-code",
+		English: "fa-solid fa-book",
+		Science: "fa-solid fa-flask",
+		Health: "fa-solid fa-heart-pulse",
+		"Physical Education": "fa-solid fa-person-running",
+		"Social Studies": "fa-solid fa-landmark",
+		"Financial Literacy": "fa-solid fa-chart-line",
+	};
+
+	return iconMap[subjectArea] || "fa-solid fa-book-open";
+}
+
+/* ========================================
    MAIN FUNCTION - ASYNC SCHEDULE LOADER
    ======================================== */
 
@@ -65,6 +89,9 @@ async function loadSchedule(fileName) {
 		// Loop through each class and create a card for it
 		// Using forEach instead of building one large HTML string
 		scheduleData.forEach((classItem, index) => {
+			// Get Font Awesome icon based on subject area
+			const subjectIcon = getSubjectIcon(classItem.subjectArea);
+
 			// Build HTML for each class card using template literals
 			// Template literals allow us to inject data dynamically with ${}
 			const cardHTML = `
@@ -72,18 +99,24 @@ async function loadSchedule(fileName) {
 					index * 0.1
 				}s">
                     <div class="period-badge">
-                        ${classItem.period}
+                        <i class="fa-solid fa-clock"></i> ${classItem.period}
                     </div>
                     <div class="class-name">
-                        ${classItem.className}
+                        <i class="${subjectIcon}"></i> ${classItem.className}
                     </div>
                     <div class="class-info">
-                        ${classItem.teacher}
+                        <i class="fa-solid fa-chalkboard-user"></i> ${
+							classItem.teacher
+						}
                     </div>
                     <div class="class-info">
-                        Room ${classItem.roomNumber}
+                        <i class="fa-solid fa-door-open"></i> Room ${
+							classItem.roomNumber
+						}
                     </div>
-                    <span class="subject-badge">${classItem.subjectArea}</span>
+                    <span class="subject-badge"><i class="fa-solid fa-tag"></i> ${
+						classItem.subjectArea
+					}</span>
                 </div>
             `;
 

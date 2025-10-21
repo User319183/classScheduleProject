@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Class Schedule Viewer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+        integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
 </head>
 <!-- ========================================
@@ -21,11 +24,11 @@
              HEADER SECTION
              ======================================== -->
         <div class="text-center mb-5">
-            <h1 class="display-4">⚡ Schedule Explorer</h1>
+            <h1 class="display-4"><i class="fa-solid fa-calendar-days"></i> Schedule Explorer</h1>
             <p class="lead">Navigate through different student schedules with style</p>
             <div class="mt-3">
-                <span class="badge">🎓 Academic Year 2025</span>
-                <span class="badge">📚 Multi-Student View</span>
+                <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Academic Year 2025</span>
+                <span class="badge"><i class="fa-solid fa-users"></i> Multi-Student View</span>
             </div>
         </div>
 
@@ -33,20 +36,40 @@
              INSTRUCTIONS SECTION
              ======================================== -->
         <div class="alert alert-info mb-4">
-            <h5>🎮 Navigation Controls</h5>
+            <h5 class="mb-4"><i class="fa-solid fa-gamepad"></i> Navigation Controls</h5>
             <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-2"><strong>⌨️ Keyboard Shortcuts:</strong></p>
-                    <div class="d-flex flex-wrap gap-2 mb-3">
-                        <kbd>1</kbd> <span class="text-light mx-1">Sridar</span>
-                        <kbd>2</kbd> <span class="text-light mx-1">Aadarsh</span>
-                        <kbd>3</kbd> <span class="text-light mx-1">Chang</span>
-                        <kbd>4</kbd> <span class="text-light mx-1">Hank</span>
+                <div class="col-12">
+                    <p class="mb-3"><strong><i class="fa-solid fa-keyboard"></i> Keyboard Shortcuts:</strong></p>
+                    <div class="row g-3 mb-4">
+                        <div class="col-6 col-md-6 col-lg-3">
+                            <div class="shortcut-item">
+                                <kbd>1</kbd>
+                                <span><i class="fa-solid fa-user"></i> Sridar</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-3">
+                            <div class="shortcut-item">
+                                <kbd>2</kbd>
+                                <span><i class="fa-solid fa-user"></i> Aadarsh</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-3">
+                            <div class="shortcut-item">
+                                <kbd>3</kbd>
+                                <span><i class="fa-solid fa-user"></i> Chang</span>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-6 col-lg-3">
+                            <div class="shortcut-item">
+                                <kbd>4</kbd>
+                                <span><i class="fa-solid fa-user"></i> Hank</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <p class="mb-2"><strong>🖱️ Alternative:</strong></p>
-                    <p class="mb-0">Use the dropdown selector below</p>
+                    <div class="text-center">
+                        <p class="mb-2"><strong><i class="fa-solid fa-mouse-pointer"></i> Alternative:</strong></p>
+                        <p class="mb-0 text-light">Use the dropdown selector below</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,12 +79,15 @@
              ======================================== -->
         <div class="row mb-5">
             <div class="col-md-8 mx-auto">
-                <label for="scheduleSelect" class="form-label">🎯 Select Student Schedule:</label>
+                <label for="scheduleSelect" class="form-label"><i class="fa-solid fa-bullseye"></i> Select Student
+                    Schedule:</label>
                 <select class="form-select" id="scheduleSelect">
-                    <option value="SridarSchedule.json">👨‍💻 Sridar's Schedule</option>
-                    <option value="AadarshSchedule.json">🎓 Aadarsh's Schedule</option>
-                    <option value="ChangSchedule.json">📚 Chang's Schedule</option>
-                    <option value="HankSchedule.json">⚡ Hank's Schedule</option>
+                    <option value="SridarSchedule.json"><i class="fa-solid fa-laptop-code"></i> Sridar's Schedule
+                    </option>
+                    <option value="AadarshSchedule.json"><i class="fa-solid fa-user-graduate"></i> Aadarsh's Schedule
+                    </option>
+                    <option value="ChangSchedule.json"><i class="fa-solid fa-book-open"></i> Chang's Schedule</option>
+                    <option value="HankSchedule.json"><i class="fa-solid fa-bolt"></i> Hank's Schedule</option>
                 </select>
             </div>
         </div>

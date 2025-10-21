@@ -8,16 +8,16 @@ const currentScheduleDisplay = document.getElementById("currentSchedule");
 const scheduleSelect = document.getElementById("scheduleSelect");
 
 const scheduleFiles = {
-	1: "SridarSchedule.json",
+	1: "SathvikSchedule.json",
 	2: "AadarshSchedule.json",
-	3: "ChangSchedule.json",
+	3: "EthanSchedule.json",
 	4: "HankSchedule.json",
 };
 
 const scheduleNames = {
-	"SridarSchedule.json": "Sridar",
+	"SathvikSchedule.json": "Sathvik",
 	"AadarshSchedule.json": "Aadarsh",
-	"ChangSchedule.json": "Chang",
+	"EthanSchedule.json": "Ethan",
 	"HankSchedule.json": "Hank",
 };
 
@@ -175,5 +175,5 @@ document.addEventListener("keydown", (event) => {
    ======================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-	loadSchedule("SridarSchedule.json");
+	loadSchedule("SathvikSchedule.json");
 });

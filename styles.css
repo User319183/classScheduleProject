@@ -334,6 +334,16 @@ kbd {
 	}
 }
 
+/* Schedule Title Styling */
+.schedule-title {
+	background: linear-gradient(135deg, var(--accent), var(--accent-2));
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: 700;
+	font-size: var(--text-lg);
+}
+
 /* ========================================
    UTILITY CLASSES
    ======================================== */

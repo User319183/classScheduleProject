@@ -1,0 +1,51 @@
+[
+  {
+    "className": "Honors Cybersecurity & Computer Programming",
+    "teacher": "Rehwinkel, Christine",
+    "roomNumber": "A234",
+    "period": 1,
+    "subjectArea": "Technology"
+  },
+  {
+    "className": "AP Statistics",
+    "teacher": "Marshall, Jessica",
+    "roomNumber": "A221",
+    "period": 2,
+    "subjectArea": "Math"
+  },
+  {
+    "className": "BCC ENG121 The Writing Process",
+    "teacher": "Reganato, Grace",
+    "roomNumber": "E117",
+    "period": 3,
+    "subjectArea": "English"
+  },
+  {
+    "className": "Honors Precalculus",
+    "teacher": "Marshall, Jessica",
+    "roomNumber": "A221",
+    "period": 4,
+    "subjectArea": "Math"
+  },
+  {
+    "className": "AP Computer Science A",
+    "teacher": "Rehwinkel, Christine",
+    "roomNumber": "A234",
+    "period": 5,
+    "subjectArea": "Math"
+  },
+  {
+    "className": "AP Macroeconomics",
+    "teacher": "Anderson, Robert",
+    "roomNumber": "A106",
+    "period": 6,
+    "subjectArea": "Financial Literacy"
+  },
+  {
+    "className": "Health 12",
+    "teacher": "Sininsky, Derek",
+    "roomNumber": "C130",
+    "period": 7,
+    "subjectArea": "Health"
+  }
+]

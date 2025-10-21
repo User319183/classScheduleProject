@@ -2,50 +2,75 @@
    DOM ELEMENTS AND CONSTANTS
    ======================================== */
 
-const scheduleContainer = document.getElementById('scheduleContainer');
-const statusDiv = document.getElementById('status');
-const currentScheduleDisplay = document.getElementById('currentSchedule');
-const scheduleSelect = document.getElementById('scheduleSelect');
+const scheduleContainer = document.getElementById("scheduleContainer");
+const statusDiv = document.getElementById("status");
+const currentScheduleDisplay = document.getElementById("currentSchedule");
+const scheduleSelect = document.getElementById("scheduleSelect");
 
 const scheduleFiles = {
-    '1': 'SridarSchedule.json',
-    '2': 'AadarshSchedule.json',
-    '3': 'ChangSchedule.json',
-    '4': 'HankSchedule.json'
+	1: "SridarSchedule.json",
+	2: "AadarshSchedule.json",
+	3: "ChangSchedule.json",
+	4: "HankSchedule.json",
 };
 
 const scheduleNames = {
-    'SridarSchedule.json': 'Sridar',
-    'AadarshSchedule.json': 'Aadarsh',
-    'ChangSchedule.json': 'Chang',
-    'HankSchedule.json': 'Hank'
+	"SridarSchedule.json": "Sridar",
+	"AadarshSchedule.json": "Aadarsh",
+	"ChangSchedule.json": "Chang",
+	"HankSchedule.json": "Hank",
 };
 
 /* ========================================
    MAIN FUNCTION - ASYNC SCHEDULE LOADER
    ======================================== */
 
+/**
+ * Loads and displays a student's schedule from a JSON file
+ * @param {string} fileName - The name of the JSON file to load (e.g., "SridarSchedule.json")
+ *
+ * This function uses async/await to handle asynchronous fetch operations:
+ * - async: Marks this function as asynchronous, allowing use of await inside
+ * - await: Pauses execution until the Promise resolves, making async code look synchronous
+ *
+ * Template literal usage:
+ * - `./json/${fileName}` - Uses template literal with ${} to inject the fileName parameter
+ *   into the fetch path, enabling dynamic file loading based on user selection
+ */
 async function loadSchedule(fileName) {
-    try {
-        statusDiv.innerHTML = `<div class="alert alert-info"><div class="loading-spinner"></div>Loading schedule...</div>`;
-        scheduleContainer.innerHTML = "";
+	try {
+		// Show loading message while fetching data
+		statusDiv.innerHTML = `<div class="alert alert-info"><div class="loading-spinner"></div>Loading schedule...</div>`;
+		scheduleContainer.innerHTML = "";
 
-        const response = await fetch(`./json/${fileName}`);
+		// Fetch data from JSON file using template literal for dynamic path
+		// The await keyword pauses execution until fetch completes
+		const response = await fetch(`./json/${fileName}`);
 
-        if (!response.ok) {
-            throw new Error(`Failed to load schedule: ${response.status}`);
-        }
+		// Check if the fetch was successful
+		if (!response.ok) {
+			throw new Error(`Failed to load schedule: ${response.status}`);
+		}
 
-        const scheduleData = await response.json();
+		// Parse the JSON response - await ensures we wait for parsing to complete
+		const scheduleData = await response.json();
 
-        scheduleData.sort((a, b) => a.period - b.period);
+		// EXTRA CREDIT: Sort classes by period number before displaying
+		scheduleData.sort((a, b) => a.period - b.period);
 
-        statusDiv.innerHTML = "";
-        currentScheduleDisplay.textContent = `${scheduleNames[fileName]}'s Schedule`;
+		// Clear loading message and update current schedule display
+		statusDiv.innerHTML = "";
+		currentScheduleDisplay.textContent = `${scheduleNames[fileName]}'s Schedule`;
 
-        scheduleData.forEach((classItem, index) => {
-            const cardHTML = `
-                <div class="schedule-card" style="animation-delay: ${index * 0.1}s">
+		// Loop through each class and create a card for it
+		// Using forEach instead of building one large HTML string
+		scheduleData.forEach((classItem, index) => {
+			// Build HTML for each class card using template literals
+			// Template literals allow us to inject data dynamically with ${}
+			const cardHTML = `
+                <div class="schedule-card" style="animation-delay: ${
+					index * 0.1
+				}s">
                     <div class="period-badge">
                         ${classItem.period}
                     </div>
@@ -62,43 +87,60 @@ async function loadSchedule(fileName) {
                 </div>
             `;
 
-            scheduleContainer.insertAdjacentHTML('beforeend', cardHTML);
-        });
-
-    } catch (error) {
-        console.error('Error loading schedule:', error);
-        statusDiv.innerHTML = `
+			/**
+			 * insertAdjacentHTML('beforeend', html) adds HTML to the container
+			 * - 'beforeend': Inserts the HTML just before the closing tag of scheduleContainer
+			 * - This is more efficient than innerHTML += because it doesn't re-parse existing content
+			 * - Each card is added one at a time inside the loop, building up the schedule gradually
+			 */
+			scheduleContainer.insertAdjacentHTML("beforeend", cardHTML);
+		});
+	} catch (error) {
+		console.error("Error loading schedule:", error);
+		statusDiv.innerHTML = `
             <div class="alert alert-danger error-message">
                 <strong>Error!</strong> Unable to load the schedule. Please check the file path and try again.
                 <br><small>Error details: ${error.message}</small>
             </div>
         `;
-        currentScheduleDisplay.textContent = 'Error loading schedule';
-    }
+		currentScheduleDisplay.textContent = "Error loading schedule";
+	}
 }
 
 /* ========================================
-   EVENT LISTENERS
+   EVENT LISTENERS - Non-Button Event Switching
    ======================================== */
 
-scheduleSelect.addEventListener('change', (event) => {
-    const selectedFile = event.target.value;
-    loadSchedule(selectedFile);
+/**
+ * Event Listener #1: Dropdown (change event)
+ * This 'change' event fires when the user selects a different option in the dropdown
+ * NOT a simple button click - uses a select element's change event
+ */
+scheduleSelect.addEventListener("change", (event) => {
+	const selectedFile = event.target.value;
+	loadSchedule(selectedFile); // Pass fileName parameter to async function
 });
 
-document.addEventListener('keydown', (event) => {
-    const key = event.key;
-    if (scheduleFiles[key]) {
-        const fileName = scheduleFiles[key];
-        scheduleSelect.value = fileName;
-        loadSchedule(fileName);
-    }
+/**
+ * Event Listener #2: Keyboard (keydown event)
+ * This 'keydown' event fires when the user presses a key
+ * NOT a simple button click - responds to keyboard input (1, 2, 3, 4)
+ * Provides an alternative navigation method for accessibility and convenience
+ */
+document.addEventListener("keydown", (event) => {
+	const key = event.key;
+	// Check if the pressed key corresponds to a schedule file
+	if (scheduleFiles[key]) {
+		const fileName = scheduleFiles[key];
+		scheduleSelect.value = fileName; // Update dropdown to match
+		loadSchedule(fileName); // Pass fileName parameter to async function
+	}
 });
 
 /* ========================================
    PAGE INITIALIZATION
    ======================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadSchedule('SridarSchedule.json');
+document.addEventListener("DOMContentLoaded", () => {
+	loadSchedule("SridarSchedule.json");
 });

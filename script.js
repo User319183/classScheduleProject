@@ -45,6 +45,54 @@ function getSubjectIcon(subjectArea) {
 	return iconMap[subjectArea] || "fa-solid fa-book-open";
 }
 
+/**
+ * Calculates animation delay using a fibonacci-inspired algorithm combined with subject weighting
+ * Creates a more natural, organic animation pattern instead of linear progression
+ * @param {number} index - The index position of the class in the array
+ * @param {number} period - The class period number
+ * @param {string} subjectArea - The subject area for additional weighting
+ * @returns {number} Animation delay in seconds
+ */
+function calculateFibonacciDelay(index, period, subjectArea) {
+	// Generate a fibonacci-like sequence but cap it to prevent overly long delays
+	const fib = (n) => {
+		if (n <= 1) return n;
+		let a = 0, b = 1;
+		for (let i = 2; i <= n; i++) {
+			[a, b] = [b, a + b];
+		}
+		return b;
+	};
+
+	// Create subject area weights for variety
+	const subjectWeights = {
+		"Math": 0.05,
+		"Technology": 0.08,
+		"English": 0.12,
+		"Science": 0.15,
+		"Health": 0.07,
+		"Physical Education": 0.03,
+		"Social Studies": 0.10,
+		"Financial Literacy": 0.09
+	};
+
+	// Base fibonacci calculation with modular arithmetic to keep delays reasonable
+	const fibValue = fib(index + 1) % 8;
+	
+	// Add period-based offset (early periods animate faster)
+	const periodWeight = (9 - period) * 0.02;
+	
+	// Add subject-specific timing
+	const subjectWeight = subjectWeights[subjectArea] || 0.1;
+	
+	// Combine all factors with some randomization based on index
+	const randomFactor = (index * 7) % 3 * 0.02; // Creates 0, 0.02, or 0.04 second variations
+	
+	// Final calculation: fibonacci base + period weight + subject weight + random factor
+	// Multiply by 0.1 to keep delays reasonable (similar scale to original but more varied)
+	return (fibValue * 0.1) + periodWeight + subjectWeight + randomFactor;
+}
+
 /* ========================================
    MAIN FUNCTION - ASYNC SCHEDULE LOADER
    ======================================== */
@@ -92,12 +140,13 @@ async function loadSchedule(fileName) {
 			// Get Font Awesome icon based on subject area
 			const subjectIcon = getSubjectIcon(classItem.subjectArea);
 
+			// Calculate dynamic animation delay
+			const fibonacciDelay = calculateFibonacciDelay(index, classItem.period, classItem.subjectArea);
+
 			// Build HTML for each class card using template literals
 			// Template literals allow us to inject data dynamically with ${}
 			const cardHTML = `
-                <div class="schedule-card" style="animation-delay: ${
-					index * 0.1
-				}s">
+                <div class="schedule-card" style="animation-delay: ${fibonacciDelay}s">
                     <div class="period-badge">
                         <i class="fa-solid fa-clock"></i> ${classItem.period}
                     </div>
